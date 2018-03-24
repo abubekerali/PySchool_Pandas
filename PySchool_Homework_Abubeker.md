@@ -1,10 +1,9 @@
 
-
-```python
-#The observed trends are
+The observed trends are:
 #1 Students in high spending schools performed low
 #2 Students in low budget spending schools performed high
-```
+#3 Chartered School Performed high and district school performed low
+#4 Large size schools performed low
 
 
 ```python
@@ -177,14 +176,11 @@ students_df.shape
 
 
 
-    (39170, 9)
+    (39170, 7)
 
 
 
-
-```python
-
-```
+### District Summary
 
 
 ```python
@@ -409,9 +405,9 @@ District_School.head()
 
 ```python
 #Grouping the district school data with school name
-District_group=District_School.groupby("school").agg({"type":"unique",
+District_group=District_School.groupby("school").agg({"type":"first",
                                                                      "name":"count",
-                                                                     "budget":"unique",
+                                                                     "budget":"first",
                                                                      "math_score":"mean",
                                                                      "reading_score":["mean"],
                                                                      "%Passing Reading":["sum"],
@@ -441,9 +437,9 @@ District_group.head()
     </tr>
     <tr>
       <th></th>
-      <th>unique</th>
+      <th>first</th>
       <th>count</th>
-      <th>unique</th>
+      <th>first</th>
       <th>mean</th>
       <th>mean</th>
       <th>sum</th>
@@ -463,9 +459,9 @@ District_group.head()
   <tbody>
     <tr>
       <th>Bailey High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>4976</td>
-      <td>[3124928]</td>
+      <td>3124928</td>
       <td>77.048432</td>
       <td>81.033963</td>
       <td>4077.0</td>
@@ -473,9 +469,9 @@ District_group.head()
     </tr>
     <tr>
       <th>Cabrera High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1858</td>
-      <td>[1081356]</td>
+      <td>1081356</td>
       <td>83.061895</td>
       <td>83.975780</td>
       <td>1803.0</td>
@@ -483,9 +479,9 @@ District_group.head()
     </tr>
     <tr>
       <th>Figueroa High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2949</td>
-      <td>[1884411]</td>
+      <td>1884411</td>
       <td>76.711767</td>
       <td>81.158020</td>
       <td>2381.0</td>
@@ -493,9 +489,9 @@ District_group.head()
     </tr>
     <tr>
       <th>Ford High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2739</td>
-      <td>[1763916]</td>
+      <td>1763916</td>
       <td>77.102592</td>
       <td>80.746258</td>
       <td>2172.0</td>
@@ -503,9 +499,9 @@ District_group.head()
     </tr>
     <tr>
       <th>Griffin High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1468</td>
-      <td>[917500]</td>
+      <td>917500</td>
       <td>83.351499</td>
       <td>83.816757</td>
       <td>1426.0</td>
@@ -764,10 +760,7 @@ District_group["Overall Passing Rate"]=District_group["Overall Passing Rate"]
 District_group["Per Student Budget"]=District_group["budget"]/District_group["name"]*100
 ```
 
-
-```python
-#School Summary
-```
+### School Summary
 
 
 ```python
@@ -809,183 +802,183 @@ District_group.rename(columns={"type":"School Type","name":"Total Students","bud
   <tbody>
     <tr>
       <th>Bailey High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>4976</td>
-      <td>[3124928]</td>
+      <td>3124928</td>
       <td>77.048432</td>
       <td>81.033963</td>
       <td>81.933280</td>
       <td>66.680064</td>
       <td>74.306672</td>
-      <td>[62800.0]</td>
+      <td>62800.0</td>
     </tr>
     <tr>
       <th>Cabrera High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1858</td>
-      <td>[1081356]</td>
+      <td>1081356</td>
       <td>83.061895</td>
       <td>83.975780</td>
       <td>97.039828</td>
       <td>94.133477</td>
       <td>95.586652</td>
-      <td>[58200.0]</td>
+      <td>58200.0</td>
     </tr>
     <tr>
       <th>Figueroa High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2949</td>
-      <td>[1884411]</td>
+      <td>1884411</td>
       <td>76.711767</td>
       <td>81.158020</td>
       <td>80.739234</td>
       <td>65.988471</td>
       <td>73.363852</td>
-      <td>[63900.0]</td>
+      <td>63900.0</td>
     </tr>
     <tr>
       <th>Ford High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2739</td>
-      <td>[1763916]</td>
+      <td>1763916</td>
       <td>77.102592</td>
       <td>80.746258</td>
       <td>79.299014</td>
       <td>68.309602</td>
       <td>73.804308</td>
-      <td>[64400.0]</td>
+      <td>64400.0</td>
     </tr>
     <tr>
       <th>Griffin High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1468</td>
-      <td>[917500]</td>
+      <td>917500</td>
       <td>83.351499</td>
       <td>83.816757</td>
       <td>97.138965</td>
       <td>93.392371</td>
       <td>95.265668</td>
-      <td>[62500.0]</td>
+      <td>62500.0</td>
     </tr>
     <tr>
       <th>Hernandez High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>4635</td>
-      <td>[3022020]</td>
+      <td>3022020</td>
       <td>77.289752</td>
       <td>80.934412</td>
       <td>80.862999</td>
       <td>66.752967</td>
       <td>73.807983</td>
-      <td>[65200.0]</td>
+      <td>65200.0</td>
     </tr>
     <tr>
       <th>Holden High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>427</td>
-      <td>[248087]</td>
+      <td>248087</td>
       <td>83.803279</td>
       <td>83.814988</td>
       <td>96.252927</td>
       <td>92.505855</td>
       <td>94.379391</td>
-      <td>[58100.0]</td>
+      <td>58100.0</td>
     </tr>
     <tr>
       <th>Huang High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2917</td>
-      <td>[1910635]</td>
+      <td>1910635</td>
       <td>76.629414</td>
       <td>81.182722</td>
       <td>81.316421</td>
       <td>65.683922</td>
       <td>73.500171</td>
-      <td>[65500.0]</td>
+      <td>65500.0</td>
     </tr>
     <tr>
       <th>Johnson High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>4761</td>
-      <td>[3094650]</td>
+      <td>3094650</td>
       <td>77.072464</td>
       <td>80.966394</td>
       <td>81.222432</td>
       <td>66.057551</td>
       <td>73.639992</td>
-      <td>[65000.0]</td>
+      <td>65000.0</td>
     </tr>
     <tr>
       <th>Pena High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>962</td>
-      <td>[585858]</td>
+      <td>585858</td>
       <td>83.839917</td>
       <td>84.044699</td>
       <td>95.945946</td>
       <td>94.594595</td>
       <td>95.270270</td>
-      <td>[60900.0]</td>
+      <td>60900.0</td>
     </tr>
     <tr>
       <th>Rodriguez High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>3999</td>
-      <td>[2547363]</td>
+      <td>2547363</td>
       <td>76.842711</td>
       <td>80.744686</td>
       <td>80.220055</td>
       <td>66.366592</td>
       <td>73.293323</td>
-      <td>[63700.0]</td>
+      <td>63700.0</td>
     </tr>
     <tr>
       <th>Shelton High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1761</td>
-      <td>[1056600]</td>
+      <td>1056600</td>
       <td>83.359455</td>
       <td>83.725724</td>
       <td>95.854628</td>
       <td>93.867121</td>
       <td>94.860875</td>
-      <td>[60000.0]</td>
+      <td>60000.0</td>
     </tr>
     <tr>
       <th>Thomas High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1635</td>
-      <td>[1043130]</td>
+      <td>1043130</td>
       <td>83.418349</td>
       <td>83.848930</td>
       <td>97.308869</td>
       <td>93.272171</td>
       <td>95.290520</td>
-      <td>[63800.0]</td>
+      <td>63800.0</td>
     </tr>
     <tr>
       <th>Wilson High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>2283</td>
-      <td>[1319574]</td>
+      <td>1319574</td>
       <td>83.274201</td>
       <td>83.989488</td>
       <td>96.539641</td>
       <td>93.867718</td>
       <td>95.203679</td>
-      <td>[57800.0]</td>
+      <td>57800.0</td>
     </tr>
     <tr>
       <th>Wright High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1800</td>
-      <td>[1049400]</td>
+      <td>1049400</td>
       <td>83.682222</td>
       <td>83.955000</td>
       <td>96.611111</td>
       <td>93.333333</td>
       <td>94.972222</td>
-      <td>[58300.0]</td>
+      <td>58300.0</td>
     </tr>
   </tbody>
 </table>
@@ -1096,6 +1089,8 @@ District_group.rename(columns={"type":"School Type","name":"Total Students","bud
 </div>
 
 
+
+### Top Performing School
 
 
 ```python
@@ -1142,69 +1137,71 @@ Top_Performing_School.head()
   <tbody>
     <tr>
       <th>Cabrera High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1858</td>
-      <td>[1081356]</td>
+      <td>1081356</td>
       <td>83.061895</td>
       <td>83.975780</td>
       <td>97.039828</td>
       <td>94.133477</td>
       <td>95.586652</td>
-      <td>[58200.0]</td>
+      <td>58200.0</td>
     </tr>
     <tr>
       <th>Thomas High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1635</td>
-      <td>[1043130]</td>
+      <td>1043130</td>
       <td>83.418349</td>
       <td>83.848930</td>
       <td>97.308869</td>
       <td>93.272171</td>
       <td>95.290520</td>
-      <td>[63800.0]</td>
+      <td>63800.0</td>
     </tr>
     <tr>
       <th>Pena High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>962</td>
-      <td>[585858]</td>
+      <td>585858</td>
       <td>83.839917</td>
       <td>84.044699</td>
       <td>95.945946</td>
       <td>94.594595</td>
       <td>95.270270</td>
-      <td>[60900.0]</td>
+      <td>60900.0</td>
     </tr>
     <tr>
       <th>Griffin High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1468</td>
-      <td>[917500]</td>
+      <td>917500</td>
       <td>83.351499</td>
       <td>83.816757</td>
       <td>97.138965</td>
       <td>93.392371</td>
       <td>95.265668</td>
-      <td>[62500.0]</td>
+      <td>62500.0</td>
     </tr>
     <tr>
       <th>Wilson High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>2283</td>
-      <td>[1319574]</td>
+      <td>1319574</td>
       <td>83.274201</td>
       <td>83.989488</td>
       <td>96.539641</td>
       <td>93.867718</td>
       <td>95.203679</td>
-      <td>[57800.0]</td>
+      <td>57800.0</td>
     </tr>
   </tbody>
 </table>
 </div>
 
 
+
+### low performing school
 
 
 ```python
@@ -1251,63 +1248,63 @@ low_performing_school.head()
   <tbody>
     <tr>
       <th>Rodriguez High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>3999</td>
-      <td>[2547363]</td>
+      <td>2547363</td>
       <td>76.842711</td>
       <td>80.744686</td>
       <td>80.220055</td>
       <td>66.366592</td>
       <td>73.293323</td>
-      <td>[63700.0]</td>
+      <td>63700.0</td>
     </tr>
     <tr>
       <th>Figueroa High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2949</td>
-      <td>[1884411]</td>
+      <td>1884411</td>
       <td>76.711767</td>
       <td>81.158020</td>
       <td>80.739234</td>
       <td>65.988471</td>
       <td>73.363852</td>
-      <td>[63900.0]</td>
+      <td>63900.0</td>
     </tr>
     <tr>
       <th>Huang High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2917</td>
-      <td>[1910635]</td>
+      <td>1910635</td>
       <td>76.629414</td>
       <td>81.182722</td>
       <td>81.316421</td>
       <td>65.683922</td>
       <td>73.500171</td>
-      <td>[65500.0]</td>
+      <td>65500.0</td>
     </tr>
     <tr>
       <th>Johnson High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>4761</td>
-      <td>[3094650]</td>
+      <td>3094650</td>
       <td>77.072464</td>
       <td>80.966394</td>
       <td>81.222432</td>
       <td>66.057551</td>
       <td>73.639992</td>
-      <td>[65000.0]</td>
+      <td>65000.0</td>
     </tr>
     <tr>
       <th>Ford High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2739</td>
-      <td>[1763916]</td>
+      <td>1763916</td>
       <td>77.102592</td>
       <td>80.746258</td>
       <td>79.299014</td>
       <td>68.309602</td>
       <td>73.804308</td>
-      <td>[64400.0]</td>
+      <td>64400.0</td>
     </tr>
   </tbody>
 </table>
@@ -1315,10 +1312,7 @@ low_performing_school.head()
 
 
 
-
-```python
-#Math Score by grade
-```
+### Math Score by grade
 
 
 ```python
@@ -1396,6 +1390,18 @@ Math_Score_Per_Grade
                            12th     83.644986
                            9th      83.264706
     Name: math_score, dtype: float64
+
+
+
+
+```python
+type(Math_Score_Per_Grade)
+```
+
+
+
+
+    pandas.core.series.Series
 
 
 
@@ -1691,20 +1697,125 @@ Math_Score_Per_Grade_df
 
 
 ```python
-Math_Score_Per_Grade_df.columns
+Math_Score_Per_Grade_df.set_index("school")
 ```
 
 
+    ---------------------------------------------------------------------------
 
+    KeyError                                  Traceback (most recent call last)
 
-    Index(['math_score'], dtype='object')
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\indexes\base.py in get_loc(self, key, method, tolerance)
+       2133             try:
+    -> 2134                 return self._engine.get_loc(key)
+       2135             except KeyError:
+    
 
+    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:4433)()
+    
+
+    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:4279)()
+    
+
+    pandas\src\hashtable_class_helper.pxi in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:13742)()
+    
+
+    pandas\src\hashtable_class_helper.pxi in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:13696)()
+    
+
+    KeyError: 'school'
+
+    
+    During handling of the above exception, another exception occurred:
+    
+
+    KeyError                                  Traceback (most recent call last)
+
+    <ipython-input-29-0bf4d17bcf62> in <module>()
+    ----> 1 Math_Score_Per_Grade_df.set_index("school")
+    
+
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py in set_index(self, keys, drop, append, inplace, verify_integrity)
+       2915                 names.append(None)
+       2916             else:
+    -> 2917                 level = frame[col]._values
+       2918                 names.append(col)
+       2919                 if drop:
+    
+
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py in __getitem__(self, key)
+       2057             return self._getitem_multilevel(key)
+       2058         else:
+    -> 2059             return self._getitem_column(key)
+       2060 
+       2061     def _getitem_column(self, key):
+    
+
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\frame.py in _getitem_column(self, key)
+       2064         # get column
+       2065         if self.columns.is_unique:
+    -> 2066             return self._get_item_cache(key)
+       2067 
+       2068         # duplicate columns & possible reduce dimensionality
+    
+
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\generic.py in _get_item_cache(self, item)
+       1384         res = cache.get(item)
+       1385         if res is None:
+    -> 1386             values = self._data.get(item)
+       1387             res = self._box_item_values(item, values)
+       1388             cache[item] = res
+    
+
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\internals.py in get(self, item, fastpath)
+       3541 
+       3542             if not isnull(item):
+    -> 3543                 loc = self.items.get_loc(item)
+       3544             else:
+       3545                 indexer = np.arange(len(self.items))[isnull(self.items)]
+    
+
+    C:\ProgramData\Anaconda3\lib\site-packages\pandas\indexes\base.py in get_loc(self, key, method, tolerance)
+       2134                 return self._engine.get_loc(key)
+       2135             except KeyError:
+    -> 2136                 return self._engine.get_loc(self._maybe_cast_indexer(key))
+       2137 
+       2138         indexer = self.get_indexer([key], method=method, tolerance=tolerance)
+    
+
+    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:4433)()
+    
+
+    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:4279)()
+    
+
+    pandas\src\hashtable_class_helper.pxi in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:13742)()
+    
+
+    pandas\src\hashtable_class_helper.pxi in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:13696)()
+    
+
+    KeyError: 'school'
 
 
 
 ```python
-#Reading Score Per Grade
+Math_Score_Per_Grade_df.index()
 ```
+
+
+    ---------------------------------------------------------------------------
+
+    TypeError                                 Traceback (most recent call last)
+
+    <ipython-input-58-c2593fab10c5> in <module>()
+    ----> 1 Math_Score_Per_Grade_df.index()
+    
+
+    TypeError: 'MultiIndex' object is not callable
+
+
+### Reading Score Per Grade
 
 
 ```python
@@ -2002,10 +2113,7 @@ Reading_Score_Per_Grade_df
 
 
 
-
-```python
-#Score by School Spending
-```
+### Score by School Spending
 
 
 ```python
@@ -2100,67 +2208,67 @@ District_group.head()
   <tbody>
     <tr>
       <th>Bailey High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>4976</td>
-      <td>[3124928]</td>
+      <td>3124928</td>
       <td>77.048432</td>
       <td>81.033963</td>
       <td>81.933280</td>
       <td>66.680064</td>
       <td>74.306672</td>
-      <td>[62800.0]</td>
+      <td>62800.0</td>
       <td>62500 to 64000</td>
     </tr>
     <tr>
       <th>Cabrera High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1858</td>
-      <td>[1081356]</td>
+      <td>1081356</td>
       <td>83.061895</td>
       <td>83.975780</td>
       <td>97.039828</td>
       <td>94.133477</td>
       <td>95.586652</td>
-      <td>[58200.0]</td>
+      <td>58200.0</td>
       <td>58000 to 59500</td>
     </tr>
     <tr>
       <th>Figueroa High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2949</td>
-      <td>[1884411]</td>
+      <td>1884411</td>
       <td>76.711767</td>
       <td>81.158020</td>
       <td>80.739234</td>
       <td>65.988471</td>
       <td>73.363852</td>
-      <td>[63900.0]</td>
+      <td>63900.0</td>
       <td>62500 to 64000</td>
     </tr>
     <tr>
       <th>Ford High School</th>
-      <td>[District]</td>
+      <td>District</td>
       <td>2739</td>
-      <td>[1763916]</td>
+      <td>1763916</td>
       <td>77.102592</td>
       <td>80.746258</td>
       <td>79.299014</td>
       <td>68.309602</td>
       <td>73.804308</td>
-      <td>[64400.0]</td>
+      <td>64400.0</td>
       <td>64000 to 65500</td>
     </tr>
     <tr>
       <th>Griffin High School</th>
-      <td>[Charter]</td>
+      <td>Charter</td>
       <td>1468</td>
-      <td>[917500]</td>
+      <td>917500</td>
       <td>83.351499</td>
       <td>83.816757</td>
       <td>97.138965</td>
       <td>93.392371</td>
       <td>95.265668</td>
-      <td>[62500.0]</td>
+      <td>62500.0</td>
       <td>61000 to 62500</td>
     </tr>
   </tbody>
@@ -2172,7 +2280,7 @@ District_group.head()
 
 ```python
 
-Per_Student_Budget_group=District_group[["math_score","reading_score","%Passing Math","%Passing Reading","Overall Passing Rate","Per Student Budget"]]
+Per_Student_Budget_group=District_group[["math_score","reading_score","%Passing Math","%Passing Reading","Overall Passing Rate","Per Student Budget Group"]]
 ```
 
 
@@ -2193,12 +2301,10 @@ Per_Student_Budget_group.head()
       <th>%Passing Math</th>
       <th>%Passing Reading</th>
       <th>Overall Passing Rate</th>
-      <th>Per Student Budget</th>
       <th>Per Student Budget Group</th>
     </tr>
     <tr>
       <th>school</th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -2215,7 +2321,6 @@ Per_Student_Budget_group.head()
       <td>66.680064</td>
       <td>81.933280</td>
       <td>74.306672</td>
-      <td>[62800.0]</td>
       <td>62500 to 64000</td>
     </tr>
     <tr>
@@ -2225,7 +2330,6 @@ Per_Student_Budget_group.head()
       <td>94.133477</td>
       <td>97.039828</td>
       <td>95.586652</td>
-      <td>[58200.0]</td>
       <td>58000 to 59500</td>
     </tr>
     <tr>
@@ -2235,7 +2339,6 @@ Per_Student_Budget_group.head()
       <td>65.988471</td>
       <td>80.739234</td>
       <td>73.363852</td>
-      <td>[63900.0]</td>
       <td>62500 to 64000</td>
     </tr>
     <tr>
@@ -2245,7 +2348,6 @@ Per_Student_Budget_group.head()
       <td>68.309602</td>
       <td>79.299014</td>
       <td>73.804308</td>
-      <td>[64400.0]</td>
       <td>64000 to 65500</td>
     </tr>
     <tr>
@@ -2255,7 +2357,6 @@ Per_Student_Budget_group.head()
       <td>93.392371</td>
       <td>97.138965</td>
       <td>95.265668</td>
-      <td>[62500.0]</td>
       <td>61000 to 62500</td>
     </tr>
   </tbody>
@@ -2358,72 +2459,7 @@ Scores_by_school_spending.mean()
 
 
 
-
-```python
-#Scores by School type
-
-```
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>School ID</th>
-      <th>school</th>
-      <th>type</th>
-      <th>size</th>
-      <th>budget</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>Huang High School</td>
-      <td>District</td>
-      <td>2917</td>
-      <td>1910635</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>Figueroa High School</td>
-      <td>District</td>
-      <td>2949</td>
-      <td>1884411</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>Shelton High School</td>
-      <td>Charter</td>
-      <td>1761</td>
-      <td>1056600</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>Hernandez High School</td>
-      <td>District</td>
-      <td>4635</td>
-      <td>3022020</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>Griffin High School</td>
-      <td>Charter</td>
-      <td>1468</td>
-      <td>917500</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+### Scores by School type
 
 
 
@@ -2445,89 +2481,58 @@ Scores_by_School_Type.mean()
 ```
 
 
-    ---------------------------------------------------------------------------
 
-    TypeError                                 Traceback (most recent call last)
 
-    <ipython-input-148-34bfc686c3ae> in <module>()
-    ----> 1 Scores_by_School_Type.count()
-    
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>math_score</th>
+      <th>reading_score</th>
+      <th>%Passing Math</th>
+      <th>%Passing Reading</th>
+      <th>Overall Passing Rate</th>
+    </tr>
+    <tr>
+      <th>type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Charter</th>
+      <td>83.473852</td>
+      <td>83.896421</td>
+      <td>93.620830</td>
+      <td>96.586489</td>
+      <td>95.103660</td>
+    </tr>
+    <tr>
+      <th>District</th>
+      <td>76.956733</td>
+      <td>80.966636</td>
+      <td>66.548453</td>
+      <td>80.799062</td>
+      <td>73.673757</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in count(self)
-       3877 
-       3878         data, _ = self._get_data_to_aggregate()
-    -> 3879         ids, _, ngroups = self.grouper.group_info
-       3880         mask = ids != -1
-       3881 
-    
 
-    pandas\src\properties.pyx in pandas.lib.cache_readonly.__get__ (pandas\lib.c:45588)()
-    
 
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in group_info(self)
-       1678     @cache_readonly
-       1679     def group_info(self):
-    -> 1680         comp_ids, obs_group_ids = self._get_compressed_labels()
-       1681 
-       1682         ngroups = len(obs_group_ids)
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in _get_compressed_labels(self)
-       1685 
-       1686     def _get_compressed_labels(self):
-    -> 1687         all_labels = [ping.labels for ping in self.groupings]
-       1688         if len(all_labels) > 1:
-       1689             group_index = get_group_index(all_labels, self.shape,
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in <listcomp>(.0)
-       1685 
-       1686     def _get_compressed_labels(self):
-    -> 1687         all_labels = [ping.labels for ping in self.groupings]
-       1688         if len(all_labels) > 1:
-       1689             group_index = get_group_index(all_labels, self.shape,
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in labels(self)
-       2316     def labels(self):
-       2317         if self._labels is None:
-    -> 2318             self._make_labels()
-       2319         return self._labels
-       2320 
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in _make_labels(self)
-       2327     def _make_labels(self):
-       2328         if self._labels is None or self._group_index is None:
-    -> 2329             labels, uniques = algos.factorize(self.grouper, sort=self.sort)
-       2330             uniques = Index(uniques, name=self.name)
-       2331             self._labels = labels
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\algorithms.py in factorize(values, sort, order, na_sentinel, size_hint)
-        311     table = hash_klass(size_hint or len(vals))
-        312     uniques = vec_klass()
-    --> 313     labels = table.get_labels(vals, uniques, 0, na_sentinel, True)
-        314 
-        315     labels = _ensure_platform_int(labels)
-    
-
-    pandas\src\hashtable_class_helper.pxi in pandas.hashtable.PyObjectHashTable.get_labels (pandas\hashtable.c:15447)()
-    
-
-    TypeError: unhashable type: 'numpy.ndarray'
-
+### Scores by School Size
 
 
 ```python
-#Scores by School Size
-```
-
-
-```python
-School_Size=District_School.groupby("school").agg({"size":"unique",
+School_Size=District_School.groupby("school").agg({"size":"first",
                                                                      "name":"count",
-                                                                     "budget":"unique",
+                                                                     "budget":"first",
                                                                      "math_score":"mean",
                                                                      "reading_score":["mean"],
                                                                      "%Passing Reading":["sum"],
@@ -2557,9 +2562,9 @@ School_Size.head()
     </tr>
     <tr>
       <th></th>
-      <th>unique</th>
+      <th>first</th>
       <th>count</th>
-      <th>unique</th>
+      <th>first</th>
       <th>mean</th>
       <th>mean</th>
       <th>sum</th>
@@ -2579,9 +2584,9 @@ School_Size.head()
   <tbody>
     <tr>
       <th>Bailey High School</th>
-      <td>[4976]</td>
       <td>4976</td>
-      <td>[3124928]</td>
+      <td>4976</td>
+      <td>3124928</td>
       <td>77.048432</td>
       <td>81.033963</td>
       <td>4077.0</td>
@@ -2589,9 +2594,9 @@ School_Size.head()
     </tr>
     <tr>
       <th>Cabrera High School</th>
-      <td>[1858]</td>
       <td>1858</td>
-      <td>[1081356]</td>
+      <td>1858</td>
+      <td>1081356</td>
       <td>83.061895</td>
       <td>83.975780</td>
       <td>1803.0</td>
@@ -2599,9 +2604,9 @@ School_Size.head()
     </tr>
     <tr>
       <th>Figueroa High School</th>
-      <td>[2949]</td>
       <td>2949</td>
-      <td>[1884411]</td>
+      <td>2949</td>
+      <td>1884411</td>
       <td>76.711767</td>
       <td>81.158020</td>
       <td>2381.0</td>
@@ -2609,9 +2614,9 @@ School_Size.head()
     </tr>
     <tr>
       <th>Ford High School</th>
-      <td>[2739]</td>
       <td>2739</td>
-      <td>[1763916]</td>
+      <td>2739</td>
+      <td>1763916</td>
       <td>77.102592</td>
       <td>80.746258</td>
       <td>2172.0</td>
@@ -2619,9 +2624,9 @@ School_Size.head()
     </tr>
     <tr>
       <th>Griffin High School</th>
-      <td>[1468]</td>
       <td>1468</td>
-      <td>[917500]</td>
+      <td>1468</td>
+      <td>917500</td>
       <td>83.351499</td>
       <td>83.816757</td>
       <td>1426.0</td>
@@ -2641,12 +2646,6 @@ School_Size.columns=School_Size.columns.droplevel(1)
 
 
 ```python
-#Adding the overall passing column
-School_Size["Overall Passing Rate"]=(School_Size["%Passing Reading"]+School_Size["%Passing Math"])/2
-```
-
-
-```python
 #Calculating the percentage of passing math
 School_Size["%Passing Math"]=School_Size["%Passing Math"]/School_Size["name"]*100
 ```
@@ -2659,7 +2658,13 @@ School_Size["%Passing Reading"]=School_Size["%Passing Reading"]/School_Size["nam
 
 
 ```python
-SchoSol_Size.head()
+#Adding the overall passing column
+School_Size["Overall Passing Rate"]=(School_Size["%Passing Reading"]+School_Size["%Passing Math"])/2
+```
+
+
+```python
+School_Size.head()
 ```
 
 
@@ -2694,9 +2699,9 @@ SchoSol_Size.head()
   <tbody>
     <tr>
       <th>Bailey High School</th>
-      <td>[4976]</td>
       <td>4976</td>
-      <td>[3124928]</td>
+      <td>4976</td>
+      <td>3124928</td>
       <td>77.048432</td>
       <td>81.033963</td>
       <td>81.933280</td>
@@ -2705,9 +2710,9 @@ SchoSol_Size.head()
     </tr>
     <tr>
       <th>Cabrera High School</th>
-      <td>[1858]</td>
       <td>1858</td>
-      <td>[1081356]</td>
+      <td>1858</td>
+      <td>1081356</td>
       <td>83.061895</td>
       <td>83.975780</td>
       <td>97.039828</td>
@@ -2716,9 +2721,9 @@ SchoSol_Size.head()
     </tr>
     <tr>
       <th>Figueroa High School</th>
-      <td>[2949]</td>
       <td>2949</td>
-      <td>[1884411]</td>
+      <td>2949</td>
+      <td>1884411</td>
       <td>76.711767</td>
       <td>81.158020</td>
       <td>80.739234</td>
@@ -2727,9 +2732,9 @@ SchoSol_Size.head()
     </tr>
     <tr>
       <th>Ford High School</th>
-      <td>[2739]</td>
       <td>2739</td>
-      <td>[1763916]</td>
+      <td>2739</td>
+      <td>1763916</td>
       <td>77.102592</td>
       <td>80.746258</td>
       <td>79.299014</td>
@@ -2738,9 +2743,9 @@ SchoSol_Size.head()
     </tr>
     <tr>
       <th>Griffin High School</th>
-      <td>[1468]</td>
       <td>1468</td>
-      <td>[917500]</td>
+      <td>1468</td>
+      <td>917500</td>
       <td>83.351499</td>
       <td>83.816757</td>
       <td>97.138965</td>
@@ -2762,7 +2767,7 @@ School_Size["size"].max()
 
 
 
-    array([4976], dtype=int64)
+    4976
 
 
 
@@ -2825,7 +2830,7 @@ School_Size["size group"]=pd.cut(School_Size["size"],bins,labels=group_labels)
 
 ```python
 #grouping by school size
-School_Size_group=School_Size.groupby("size")
+School_Size_group=School_Size.groupby("size group")
 ```
 
 
@@ -2834,77 +2839,72 @@ School_Size_group.mean()
 ```
 
 
-    ---------------------------------------------------------------------------
 
-    TypeError                                 Traceback (most recent call last)
 
-    <ipython-input-193-2fc68dd66237> in <module>()
-    ----> 1 School_Size_group.count()
-    
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>size</th>
+      <th>name</th>
+      <th>budget</th>
+      <th>math_score</th>
+      <th>reading_score</th>
+      <th>%Passing Reading</th>
+      <th>%Passing Math</th>
+      <th>Overall Passing Rate</th>
+    </tr>
+    <tr>
+      <th>size group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Small=&lt;1000</th>
+      <td>694.500</td>
+      <td>694.500</td>
+      <td>416972.500</td>
+      <td>83.821598</td>
+      <td>83.929843</td>
+      <td>96.099437</td>
+      <td>93.550225</td>
+      <td>94.824831</td>
+    </tr>
+    <tr>
+      <th>Medium=1000-2000</th>
+      <td>1704.400</td>
+      <td>1704.400</td>
+      <td>1029597.200</td>
+      <td>83.374684</td>
+      <td>83.864438</td>
+      <td>96.790680</td>
+      <td>93.599695</td>
+      <td>95.195187</td>
+    </tr>
+    <tr>
+      <th>Large=2000-5000</th>
+      <td>3657.375</td>
+      <td>3657.375</td>
+      <td>2333437.125</td>
+      <td>77.746417</td>
+      <td>81.344493</td>
+      <td>82.766634</td>
+      <td>69.963361</td>
+      <td>76.364998</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in count(self)
-       3877 
-       3878         data, _ = self._get_data_to_aggregate()
-    -> 3879         ids, _, ngroups = self.grouper.group_info
-       3880         mask = ids != -1
-       3881 
-    
-
-    pandas\src\properties.pyx in pandas.lib.cache_readonly.__get__ (pandas\lib.c:45588)()
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in group_info(self)
-       1678     @cache_readonly
-       1679     def group_info(self):
-    -> 1680         comp_ids, obs_group_ids = self._get_compressed_labels()
-       1681 
-       1682         ngroups = len(obs_group_ids)
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in _get_compressed_labels(self)
-       1685 
-       1686     def _get_compressed_labels(self):
-    -> 1687         all_labels = [ping.labels for ping in self.groupings]
-       1688         if len(all_labels) > 1:
-       1689             group_index = get_group_index(all_labels, self.shape,
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in <listcomp>(.0)
-       1685 
-       1686     def _get_compressed_labels(self):
-    -> 1687         all_labels = [ping.labels for ping in self.groupings]
-       1688         if len(all_labels) > 1:
-       1689             group_index = get_group_index(all_labels, self.shape,
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in labels(self)
-       2316     def labels(self):
-       2317         if self._labels is None:
-    -> 2318             self._make_labels()
-       2319         return self._labels
-       2320 
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\groupby.py in _make_labels(self)
-       2327     def _make_labels(self):
-       2328         if self._labels is None or self._group_index is None:
-    -> 2329             labels, uniques = algos.factorize(self.grouper, sort=self.sort)
-       2330             uniques = Index(uniques, name=self.name)
-       2331             self._labels = labels
-    
-
-    C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\algorithms.py in factorize(values, sort, order, na_sentinel, size_hint)
-        311     table = hash_klass(size_hint or len(vals))
-        312     uniques = vec_klass()
-    --> 313     labels = table.get_labels(vals, uniques, 0, na_sentinel, True)
-        314 
-        315     labels = _ensure_platform_int(labels)
-    
-
-    pandas\src\hashtable_class_helper.pxi in pandas.hashtable.PyObjectHashTable.get_labels (pandas\hashtable.c:15447)()
-    
-
-    TypeError: unhashable type: 'numpy.ndarray'
 
 
 
